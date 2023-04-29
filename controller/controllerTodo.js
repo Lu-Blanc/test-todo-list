@@ -13,7 +13,7 @@ export const getAllTodo = async (req, res) => {
 export const getOneTodo = async (req, res) => {
     const Id = req.params.id;
     try {
-      const getOne = await axios.get(`${process.env.URL_2}/${Id}`);
+      const getOne = await axios.get(`https://todolist.api.devcode.gethired.id/todo-items/${Id}`);
       res.status(200).json(getOne.data);
     } catch (err) {
       if (err.response.status === 404) {
@@ -30,7 +30,7 @@ export const getOneTodo = async (req, res) => {
   export const createTodo = async (req, res) => {
     try {
       const newData = req.body;
-      const createData = await axios.post(`${process.env.URL_2}`, newData);
+      const createData = await axios.post(`https://todolist.api.devcode.gethired.id/todo-items`, newData);
       res.status(201).json(createData.data);
     } catch (err) {
       console.log(err);
@@ -42,7 +42,7 @@ export const getOneTodo = async (req, res) => {
     const Id = req.params.id;
     try {
       const updatedData = req.body; 
-      const updateData = await axios.patch(`${process.env.URL_2}/${Id}`, updatedData); 
+      const updateData = await axios.patch(`https://todolist.api.devcode.gethired.id/todo-items/${Id}`, updatedData); 
       res.status(200).json(updateData.data);
     } catch (err) {
       console.log(err);
@@ -53,7 +53,7 @@ export const getOneTodo = async (req, res) => {
   export const deleteTodo = async (req, res) => {
     const Id = req.params.id;
     try {
-      const deleteData = await axios.delete(`${process.env.URL_2}/${Id}`);
+      const deleteData = await axios.delete(`https://todolist.api.devcode.gethired.id/todo-items/${Id}`);
         res.status(200).json(deleteData.data);
       
     } catch (err) {

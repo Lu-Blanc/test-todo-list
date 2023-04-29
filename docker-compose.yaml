@@ -1,0 +1,32 @@
+version: "23.0.5"
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_DATABASE=test
+    ports:
+      - 3306:3306
+    volumes:
+      - test-mysql-data:/var/lib/mysql
+      - test-mysql-config:/etc/mysql
+  node_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      MYSQL_DBNAME: test
+      MYSQL_USER: root
+      MYSQL_HOST: db
+    volumes:
+      - ./:/devcode-nodejs
+    ports:
+      - "3030:3030"
+    depends_on:
+      - db
+
+volumes:
+  test-mysql-data:
+  test-mysql-config:
